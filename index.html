@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ganhos</title>
+    <style>
+        /* Estilo para parecer uma App de iPhone */
+        body { font-family: -apple-system, sans-serif; background: #f4f4f9; display: flex; justify-content: center; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 350px; }
+        h2 { color: #333; text-align: center; }
+        label { display: block; margin-top: 15px; color: #666; font-size: 14px; }
+        input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 15px; background: #007aff; color: white; border: none; border-radius: 8px; margin-top: 20px; font-size: 16px; font-weight: bold; }
+        #resultado { margin-top: 20px; padding: 15px; background: #e8f2ff; border-radius: 8px; color: #007aff; text-align: center; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>💰 Gamer Calc</h2>
+    
+    <label>Ganho por minuto (ex: 4.01):</label>
+    <input type="number" id="ganho" step="0.01" placeholder="0.00">
+    
+    <label>Objetivo total:</label>
+    <input type="number" id="objetivo" placeholder="Quanto queres ganhar?">
+    
+    <button onclick="calcular()">Calcular Tempo</button>
+    
+    <div id="resultado"></div>
+</div>
+
+<script>
+    function calcular() {
+        // Pegar os valores dos campos
+        const ganho = parseFloat(document.getElementById('ganho').value);
+        const objetivo = parseFloat(document.getElementById('objetivo').value);
+        const divResultado = document.getElementById('resultado');
+
+        if (ganho > 0 && objetivo > 0) {
+            const totalMinutos = objetivo / ganho;
+            const horas = Math.floor(totalMinutos / 60);
+            const minutos = Math.round(totalMinutos % 60);
+
+            // Criar a mensagem de resposta
+            let mensagem = "Tempo estimado: ";
+            if (horas > 0) {
+                mensagem += horas + "h e " + minutos + "min";
+            } else {
+                mensagem += minutos + " minutos";
+            }
+
+            divResultado.innerText = mensagem;
+            divResultado.style.display = "block";
+        } else {
+            alert("Por favor, insere valores válidos!");
+        }
+    }
+</script>
+
+</body>
+</html>
